@@ -1,0 +1,16 @@
+name: ssh-and-pwd
+run-name: SSH and run pwd command
+on:
+  pull_request:
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using private key
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: pwd
